@@ -4,5 +4,10 @@ Utils to generate bitstream files from verilog for the [Go Board](https://nandla
 
 ## Usage
 
-$ docker pull nathsou/hdl-env # or build locally: docker build -t nathsou/hdl-env .
-$ docker run --rm -v ./:/workspace nathsou/hdl-env
+```bash
+docker pull nathsou/hdl-env # or build locally: docker build -t nathsou/hdl-env .
+```
+
+```bash
+docker run --rm -v ./:/workspace nathsou/hdl-env
+```
