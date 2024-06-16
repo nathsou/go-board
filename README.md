@@ -1,6 +1,6 @@
-# Go Board Dev Container
+# NandLand Go / Alchitry Cu Dev Container
 
-[Dev container](https://containers.dev/) set up for development, synthesis & place and route, and simulation of the [Go Board](https://nandland.com/the-go-board/) (development board with a Lattice iCE40HX1K FPGA).
+[Dev container](https://containers.dev/) set up for development, synthesis & place and route, and simulation of the [NandLand Go](https://nandland.com/the-go-board/) and [Alchitry Cu](https://alchitry.com/boards/cu) FPGA development boards.
 
 ## Tools
 - [Yosys](https://github.com/YosysHQ/yosys) for synthesis
@@ -15,12 +15,20 @@ Open the project in VSCode, open the command palette and select `Dev Containers:
 
 ### Generate a bitstream file
 
-To generate a bitstream file for the Go Board, run the `gen_bitstream` program:
+NandLand Go Board:
 
 ```bash
-cd projects/chapter02
-gen_bitstream switchtes_to_leds.v
+cd projects/chapter02/go
+gen_bitstream go . switchtes_to_leds.v
 iceprog artifacts/switches_to_leds.bin
+```
+
+For the Alchitry Cu:
+
+```bash
+cd projects/chapter02/cu
+gen_bitstream cu . rst_to_leds.v
+iceprog artifacts/rst_to_leds.bin
 ```
 
  ### Run a simulation

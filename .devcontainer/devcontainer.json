@@ -1,5 +1,5 @@
 {
-    "name": "Go Board FPGA Development and Simulation Container",
+    "name": "iCE40 FPGA Development and Simulation Container",
     "build": {
         "dockerfile": "Dockerfile"
     },

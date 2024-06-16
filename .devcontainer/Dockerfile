@@ -73,7 +73,8 @@ RUN chmod +x /usr/local/bin/gen_bitstream
 COPY iceprog_raspi.sh /usr/local/bin/iceprog_raspi
 RUN chmod +x /usr/local/bin/iceprog_raspi
 
-COPY Go_Board_Pin_Constraints.pcf /keep/Go_Board_Pin_Constraints.pcf
+COPY constraints/go.pcf /keep/go.pcf
+COPY constraints/cu.pcf /keep/cu.pcf
 
 # Install Oh My Zsh
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && \
