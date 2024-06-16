@@ -19,27 +19,24 @@ RUN apt-get update && \
     pkg-config \
     python \
     python3 \
+    python3-pip \
     libftdi-dev \
     python3-dev \
     libboost-all-dev \
     cmake \
+    autoconf \
+    gperf \
     libeigen3-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 # Make a temp folder for the tools
-RUN mkdir /Tools
-WORKDIR /Tools
+RUN mkdir /tools
+WORKDIR /tools
 
 # Install icestorm tools
 RUN git clone https://github.com/YosysHQ/icestorm.git icestorm && \
     cd icestorm && \
-    make -j$(nproc) && \
-    make install
-
-# Install arachne-pnr
-RUN git clone https://github.com/cseed/arachne-pnr.git arachne-pnr && \
-    cd arachne-pnr && \
     make -j$(nproc) && \
     make install
 
@@ -50,16 +47,28 @@ RUN git clone https://github.com/YosysHQ/nextpnr nextpnr && \
     make -j$(nproc) && \
     make install
 
+# Install Icarus Verilog
+RUN git clone https://github.com/steveicarus/iverilog.git iverilog && \
+    cd iverilog && \
+    sh autoconf.sh && \
+    ./configure && \
+    make -j$(nproc) && \
+    make install
+
 # clean up
-RUN rm -rf /Tools
+RUN rm -rf /tools
+
+# Install cocotb
+RUN pip3 install cocotb pytest
+
+COPY projects/ /workspace/projects
 
 # Set the working directory
 WORKDIR /workspace
 
-# Copy the entrypoint script into the container
-COPY entrypoint.sh /keep/entrypoint.sh
+COPY gen_bitstream.sh /workspace/gen_bitstream
+RUN chmod +x /workspace/gen_bitstream
 COPY Go_Board_Pin_Constraints.pcf /keep/Go_Board_Pin_Constraints.pcf
-RUN chmod +x /keep/entrypoint.sh
 
 # Set the entrypoint to the custom script
-ENTRYPOINT ["/keep/entrypoint.sh"]
+ENTRYPOINT ["/bin/bash"]

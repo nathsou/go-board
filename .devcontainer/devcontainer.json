@@ -1,0 +1,20 @@
+{
+    "name": "Go Board FPGA Development and Simulation Container",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.shell.linux": "/bin/bash",
+                "editor.formatOnSave": true
+            },
+            "extensions": [
+                "ms-python.python",
+                "mshr-h.VerilogHDL"
+            ]
+        }
+    },
+    "remoteUser": "root",
+    "workspaceFolder": "/workspace"
+}

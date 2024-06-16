@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# This script is specific to my setup, where the Go Board is connected to a raspberry pi
 # Transfer a bitstream file to a raspberry pi and program a connected FPGA using iceprog
 
 # Configuration
