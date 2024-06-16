@@ -26,6 +26,7 @@ RUN apt-get update && \
     cmake \
     autoconf \
     gperf \
+    zsh \
     libeigen3-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -61,14 +62,22 @@ RUN rm -rf /tools
 # Install cocotb
 RUN pip3 install cocotb pytest
 
-COPY projects/ /workspace/projects
-
 # Set the working directory
 WORKDIR /workspace
 
-COPY gen_bitstream.sh /workspace/gen_bitstream
-RUN chmod +x /workspace/gen_bitstream
+# make the gen_bitstream script executable anywhere
+COPY gen_bitstream.sh /usr/local/bin/gen_bitstream
+RUN chmod +x /usr/local/bin/gen_bitstream
+
+# make the iceprog_raspi script executable anywhere
+COPY iceprog_raspi.sh /usr/local/bin/iceprog_raspi
+RUN chmod +x /usr/local/bin/iceprog_raspi
+
 COPY Go_Board_Pin_Constraints.pcf /keep/Go_Board_Pin_Constraints.pcf
 
-# Set the entrypoint to the custom script
-ENTRYPOINT ["/bin/bash"]
+# Install Oh My Zsh
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && \
+    chsh -s $(which zsh)
+
+# Set the entrypoint to zsh
+ENTRYPOINT ["/bin/zsh"]

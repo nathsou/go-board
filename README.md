@@ -15,24 +15,19 @@ Open the project in VSCode, open the command palette and select `Dev Containers:
 
 ### Generate a bitstream file
 
-To generate a bitstream file for the Go Board, run the following command:
+To generate a bitstream file for the Go Board, run the `gen_bitstream` program:
 
 ```bash
-./gen_bitstream <verilog_file> # e.g. projects/chapter02/switchtes_to_leds.v
-```
-
-The .bin file (located in the `artifacts/` directory) can then be programmed to the Go Board using `iceprog`:
-
-```bash
-iceprog <bin_file>
+cd projects/chapter02
+gen_bitstream switchtes_to_leds.v
+iceprog artifacts/switches_to_leds.bin
 ```
 
  ### Run a simulation
 
 Testbenches can be run using cocotb and Icarus Verilog which are already installed in the container.
-An example testbench is provided in the `projects/simple_dff` directory:
 
 ```bash
-cd projects/simple_dff
+cd projects/chapter05/and_gate
 make
 ```

@@ -3,13 +3,8 @@
 
 TOPLEVEL_LANG ?= verilog
 
-ifeq ($(TOPLEVEL_LANG),verilog)
-  VERILOG_SOURCES = $(shell pwd)/dff.sv
-else ifeq ($(TOPLEVEL_LANG),vhdl)
-  VHDL_SOURCES = $(shell pwd)/dff.vhdl
-endif
-
-MODULE = test_dff
-TOPLEVEL = dff
+VERILOG_SOURCES = $(shell pwd)/and_gate.v
+MODULE = test_and_gate
+TOPLEVEL = and_gate
 
 include $(shell cocotb-config --makefiles)/Makefile.sim
