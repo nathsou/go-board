@@ -1,0 +1,7 @@
+{
+    "name": "Nandland Go",
+    "pcf_path": "constraints/go.pcf",
+    "chip": "hx1k",
+    "package": "vq100",
+    "freq": 25
+}
